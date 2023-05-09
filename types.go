@@ -2,7 +2,7 @@ package main
 
 // Original Type
 const (
-	Service_2 MyOwnType = "Deposit"
+	Service_1 MyOwnType = "Deposit"
 	Service_3 MyOwnType = "Ticket-z"
 )
 
@@ -17,26 +17,26 @@ type CommonType struct {
 	CommonAtt string
 }
 
-// Service2 ****************  2nd Type Info
-type Service2 struct {
-	Att1 string
-	Att2 bool
+// ServiceDeposit ****************  2nd Type Info
+type ServiceDeposit struct {
+	RedisService    string
+	DataBaseService string
 }
 
-type Type2SubType1 struct {
-	Att1 string
-}
-
-type Type2SubType2 struct {
+type ServiceDeposit_SubType1 struct {
 	Att1 string
 }
 
-// Service3 ****************  3rd Type Info
-type Service3 struct {
+type ServiceDeposit_SubType2 struct {
 	Att1 string
-	Att2 bool
 }
 
-type Type3SubType1 struct {
+// ServiceTicketZ ****************  3rd Type Info
+type ServiceTicketZ struct {
+	DataBaseService string
+	Log             string
+}
+
+type ServiceTicketZ_SubType1 struct {
 	Att1 string
 }
