@@ -14,38 +14,23 @@ type Input struct {
 	MyType MyOwnType
 }
 
+// There are 9 Types(transactions) to attend, that provoke multiple SubTypes per each validation service execution.
+func (i Input) createTransactionByType(service *TransactionService) Transaction {
+	switch i.MyType {
+	case Service_Deposit:
+		return &DepositTransaction{
+			Service: service,
+			Att1:    i.Att1,
+		}
+	case Service_TicketZ:
+		return &TicketZTransaction{
+			Service: service,
+			Att2:    i.Att2,
+		}
+	}
+	return nil
+}
+
 type Result struct {
 	DataProcesed string
-}
-
-type SomeStruct struct {
-	Data string
-}
-
-type CommonType struct {
-	CommonAtt string
-}
-
-// ServiceDeposit ****************  2nd Type Info
-type ServiceDeposit struct {
-	RedisService    string
-	DataBaseService string
-}
-
-type ServiceDeposit_SubType1 struct {
-	Att1 string
-}
-
-type ServiceDeposit_SubType2 struct {
-	Att1 string
-}
-
-// ServiceTicketZ ****************  3rd Type Info
-type ServiceTicketZ struct {
-	DataBaseService string
-	Log             string
-}
-
-type ServiceTicketZ_SubType1 struct {
-	Att1 string
 }
