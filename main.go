@@ -7,7 +7,7 @@ type Flow interface {
 	process(Input, CommonType) error
 }
 
-// Theare 9 Types(Services) to attend,that provoke multiple SubTypes per each validation service execution.
+// There are 9 Types(Services) to attend, that provoke multiple SubTypes per each validation service execution.
 func (i Input) validateType() {
 	switch i.MyType {
 	case Service_Deposit:
