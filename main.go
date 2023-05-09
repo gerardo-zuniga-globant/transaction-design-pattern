@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 type Flow interface {
 	validate(Input) error
@@ -42,8 +45,8 @@ func (s ServiceDeposit) validate(input Input) error {
 	return nil
 }
 
-func (s ServiceDeposit) process(i Input, c CommonType) error {
-
+func (s ServiceDeposit) process(d Deposit_Data) error {
+	fmt.Println("This is the process ServiceDeposit")
 	return nil
 }
 
@@ -59,19 +62,63 @@ func (s ServiceTicketZ) validate(input Input) error {
 	return nil
 }
 
-func (s ServiceTicketZ) process(i Input, c CommonType) error {
-
+func (s ServiceTicketZ) process(d TicketZ_Data) error {
+	fmt.Println("This is the process ServiceTicketZ")
 	return nil
 }
 
 func main() {
-	Input{
-		Att1:   "Hello World",
-		MyType: Service_Deposit,
-	}.validateType()
-	fmt.Println("************************************************************************************")
-	Input{
-		Att1:   "Hola Mundo",
-		MyType: Service_TicketZ,
-	}.validateType()
+	/*
+		Input{
+			Att1:   "Hello World",
+			MyType: Service_Deposit,
+		}.validateType()
+		fmt.Println("************************************************************************************")
+		Input{
+			Att1:   "Hola Mundo",
+			MyType: Service_TicketZ,
+		}.validateType()*/
+
+	//create channels
+	chTicketz := make(chan TicketZ_Data, 50)
+	chDeposit := make(chan Deposit_Data, 50)
+
+	//launch channel listeners
+	go ServiceTicketZ{}.listenerProcessServiceTicketZ(chTicketz)
+	go ServiceDeposit{}.listenerProcessServiceDeposit(chDeposit)
+
+	//an input enter
+	example1 := Input{MyType: Service_Deposit}
+	Validate(example1, chTicketz, chDeposit)
+
+	example2 := Input{MyType: Service_TicketZ}
+	Validate(example2, chTicketz, chDeposit)
+
+	example3 := Input{MyType: Service_Deposit}
+	Validate(example3, chTicketz, chDeposit)
+
+	time.Sleep(10 * time.Second)
+}
+
+func (s ServiceTicketZ) listenerProcessServiceTicketZ(c <-chan TicketZ_Data) {
+	for input := range c {
+		s.process(input)
+	}
+}
+
+func (s ServiceDeposit) listenerProcessServiceDeposit(c <-chan Deposit_Data) {
+	for input := range c {
+		s.process(input)
+	}
+}
+
+func Validate(input Input, cTicketz chan<- TicketZ_Data, cDeposit chan<- Deposit_Data) {
+	switch input.MyType {
+	case Service_TicketZ:
+		time.Sleep(2 * time.Second)
+		cTicketz <- TicketZ_Data{}
+	case Service_Deposit:
+		time.Sleep(2 * time.Second)
+		cDeposit <- Deposit_Data{}
+	}
 }

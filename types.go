@@ -40,3 +40,9 @@ type ServiceTicketZ struct {
 type ServiceTicketZ_SubType1 struct {
 	Att1 string
 }
+
+type TicketZ_Data struct {
+}
+
+type Deposit_Data struct {
+}
