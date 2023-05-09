@@ -9,11 +9,11 @@ type Flow interface {
 
 func (i Input) validateType() {
 	switch i.MyType {
-	case Service_1:
+	case Service_Deposit:
 		ServiceDeposit{
 			RedisService: i.Att1,
 		}.validate(i)
-	case Service_3:
+	case Service_TicketZ:
 		ServiceTicketZ{
 			DataBaseService: i.Att1,
 		}.validate(i)
@@ -22,9 +22,9 @@ func (i Input) validateType() {
 
 func (i Input) processByType() {
 	switch i.MyType {
-	case Service_1:
+	case Service_Deposit:
 
-	case Service_3:
+	case Service_TicketZ:
 
 	}
 }
@@ -70,11 +70,11 @@ func (s ServiceTicketZ) process(i Input, c CommonType) error {
 func main() {
 	Input{
 		Att1:   "Hello World",
-		MyType: Service_1,
+		MyType: Service_Deposit,
 	}.validateType()
 	fmt.Println("************************************************************************************")
 	Input{
 		Att1:   "Hola Mundo",
-		MyType: Service_3,
+		MyType: Service_TicketZ,
 	}.validateType()
 }

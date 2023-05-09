@@ -2,8 +2,8 @@ package main
 
 // Original Type
 const (
-	Service_1 MyOwnType = "Deposit"
-	Service_3 MyOwnType = "Ticket-z"
+	Service_Deposit MyOwnType = "Deposit"
+	Service_TicketZ MyOwnType = "Ticket-z"
 )
 
 type MyOwnType string
