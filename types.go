@@ -10,7 +10,16 @@ type MyOwnType string
 
 type Input struct {
 	Att1   string
+	Att2   string
 	MyType MyOwnType
+}
+
+type Result struct {
+	DataProcesed string
+}
+
+type SomeStruct struct {
+	Data string
 }
 
 type CommonType struct {
