@@ -40,3 +40,16 @@ type ServiceTicketZ struct {
 type ServiceTicketZ_SubType1 struct {
 	Att1 string
 }
+
+type DepositResult struct {
+	Service        ServiceDeposit
+	ValidateCommon CommonType
+	ValidateType1  ServiceDeposit_SubType1
+	ValidateType2  ServiceDeposit_SubType2
+}
+
+type TicketZResult struct {
+	Service ServiceTicketZ
+	common  CommonType
+	type1   ServiceTicketZ_SubType1
+}
