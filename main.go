@@ -10,13 +10,9 @@ type Flow interface {
 func (i Input) validateType() {
 	switch i.MyType {
 	case Service_Deposit:
-		ServiceDeposit{
-			RedisService: i.Att1,
-		}.validate(i)
+		ServiceDeposit{}.validate(i)
 	case Service_TicketZ:
-		ServiceTicketZ{
-			DataBaseService: i.Att1,
-		}.validate(i)
+		ServiceTicketZ{}.validate(i)
 	}
 }
 
